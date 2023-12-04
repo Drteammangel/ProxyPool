@@ -25,7 +25,10 @@ class DocipCrawler(BaseCrawler):
             proxy_list = result['data']
             for proxy_item in proxy_list:
                 host = proxy_item['ip']
-                port = proxy_item['port']
+                if ':' in host:
+                    host, port = host.split(':')
+                else:
+                    port = proxy_item['port']
                 yield Proxy(host=host, port=port)
         except json.JSONDecodeError:
             print("json.JSONDecodeError")
