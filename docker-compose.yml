@@ -4,7 +4,8 @@ services:
     image: redis:alpine
     container_name: redis4proxypool
   proxypool:
-    image: "germey/proxypool:master"
+    build:
+      dockerfile: Dockerfile
     container_name: proxypool
     ports:
       - "5557:5555"
